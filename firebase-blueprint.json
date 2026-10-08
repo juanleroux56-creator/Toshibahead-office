@@ -1,0 +1,35 @@
+{
+  "entities": {
+    "QuoteLead": {
+      "title": "QuoteLead",
+      "description": "Customer quote request submission for Toshiba printer rental or purchase in Gauteng.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "fullName": { "type": "string", "maxLength": 120 },
+        "companyName": { "type": "string", "maxLength": 150 },
+        "email": { "type": "string", "maxLength": 150 },
+        "phone": { "type": "string", "maxLength": 50 },
+        "location": { "type": "string", "maxLength": 100 },
+        "modelId": { "type": "string", "maxLength": 80 },
+        "modelName": { "type": "string", "maxLength": 120 },
+        "monthlyRental36ZAR": { "type": "number" },
+        "monthlyRental60ZAR": { "type": "number" },
+        "outrightPriceZAR": { "type": "number" },
+        "financeOption": { "type": "string", "maxLength": 60 },
+        "estimatedVolume": { "type": "string", "maxLength": 60 },
+        "message": { "type": "string", "maxLength": 2000 },
+        "status": { "type": "string", "enum": ["new", "contacted", "quote_sent", "won", "closed"] },
+        "source": { "type": "string", "maxLength": 60 },
+        "createdAt": { "type": "string", "maxLength": 60 }
+      },
+      "required": ["fullName", "companyName", "email", "phone", "modelName"]
+    }
+  },
+  "firestore": {
+    "/quotes/{quoteId}": {
+      "schema": "QuoteLead",
+      "description": "Public submissions of customer quote inquiries with admin access for review."
+    }
+  }
+}

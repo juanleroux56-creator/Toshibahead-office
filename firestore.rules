@@ -1,0 +1,34 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function isValidQuote(data) {
+      return data.fullName is string && data.fullName.size() >= 2 && data.fullName.size() <= 120 &&
+             data.companyName is string && data.companyName.size() >= 2 && data.companyName.size() <= 150 &&
+             data.email is string && data.email.size() >= 5 && data.email.size() <= 150 &&
+             data.phone is string && data.phone.size() >= 5 && data.phone.size() <= 50 &&
+             data.modelName is string && data.modelName.size() <= 120;
+    }
+
+    match /quotes/{quoteId} {
+      allow create: if isValidId(quoteId) && isValidQuote(incoming());
+      allow read, update, delete: if isValidId(quoteId);
+    }
+
+    match /test/connection {
+      allow read: if true;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

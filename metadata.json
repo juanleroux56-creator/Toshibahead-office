@@ -1,0 +1,6 @@
+{
+  "name": "Toshiba Head Office",
+  "description": "Toshiba Head Office. Office printer rentals, outright purchases, pay-per-print toner plans, 4–8 hour onsite SLA, and printer fleet management across Gauteng and South Africa.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
